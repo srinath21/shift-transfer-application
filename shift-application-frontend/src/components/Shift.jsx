@@ -18,7 +18,7 @@ const ShiftManager = () => {
     const calculateShift = () => {
       const currentInMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
 
-      
+      let foundShift = false;
       for (let i = 0; i < shifts.length; i++) {
         const { start, end } = shifts[i];
         const [startHours, startMinutes] = start.split(":").map(Number);
@@ -27,7 +27,7 @@ const ShiftManager = () => {
         const startInMinutes = startHours * 60 + startMinutes;
         const endInMinutes = endHours * 60 + endMinutes;
 
-        // If current time is within this shift
+        
         if (currentInMinutes >= startInMinutes && currentInMinutes < endInMinutes) {
           setCurrentShift(`Shift: ${shifts[i].label} (${start} - ${end})`);
           foundShift = true;
@@ -35,7 +35,7 @@ const ShiftManager = () => {
         }
       }
 
-      // If no shift is found, display "Outside Working Hours"
+      
       if (!foundShift) {
         setCurrentShift("Outside Working Hours");
       }
@@ -44,26 +44,26 @@ const ShiftManager = () => {
     calculateShift();
   }, [currentTime, shifts]);
 
-  // Handle input changes for shifts
+  
   const handleShiftChange = (index, field, value) => {
     const newShifts = [...shifts];
     newShifts[index][field] = value;
     setShifts(newShifts);
   };
 
-  // Add a new shift
+  
   const addShift = () => {
     const newShift = { label: "New Shift", start: "00:00", end: "08:00" };
     setShifts([...shifts, newShift]);
   };
 
-  // Remove a shift
+  
   const removeShift = (index) => {
     const newShifts = shifts.filter((_, i) => i !== index);
     setShifts(newShifts);
   };
 
-  // Reset shifts to default values
+  
   const resetShifts = () => {
     const resetShiftsData = shifts.map(shift => ({
         ...shift,
