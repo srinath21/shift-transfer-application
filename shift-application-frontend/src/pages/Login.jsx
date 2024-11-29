@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+const navigate = useNavigate();
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -16,6 +16,7 @@ const Login = () => {
       formData.password === storedPassword
     ) {
       console.log("Logged in");
+      navigate("/dashboard");
       setError("");
     } else {
       setError("Invalid email or password. Please try again.");
