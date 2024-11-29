@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate= useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,7 +25,7 @@ const SignUp = () => {
       password: "",
       rememberPassword: false,
     });
-
+    navigate("/");
     console.log("Email and password saved in session storage.",sessionStorage.getItem("email"));
   };
 
