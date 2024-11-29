@@ -12,7 +12,7 @@ const TaskDetails = (props) => {
         TaskTitle: "",
         Details: "",
         Source: "",
-        ShiftAssinged: "",
+        ShiftAssigned: "",
         Status: "Pending",
         Priority: null
     })
@@ -23,8 +23,6 @@ const TaskDetails = (props) => {
             [key]: event.target.value
         });
     }
-
-    console.log(modifiedTaskDetails)
 
     return (
         <Dialog
@@ -74,24 +72,31 @@ const TaskDetails = (props) => {
                                 labelId='shift-label'
                                 variant='outlined'
                                 label="Assigned Shift"
-                                value={modifiedTaskDetails.AssignedShift}
-                                onChange={(event) => handleChange(event, "AssignedShift")}
+                                value={modifiedTaskDetails.ShiftAssigned}
+                                onChange={(event) => handleChange(event, "ShiftAssigned")}
                             >
-                                <MenuItem value={1}>Morning</MenuItem>
-                                <MenuItem value={2}>Afternoon</MenuItem>
-                                <MenuItem value={3}>Evening</MenuItem>
+                                <MenuItem value={"Morning"}>Morning</MenuItem>
+                                <MenuItem value={"Afternoon"}>Afternoon</MenuItem>
+                                <MenuItem value={"Evening"}>Evening</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
                     <Grid size={12}>
-                        <TextField
-                            label='Status'
-                            variant='outlined'
-                            type='text'
-                            disabled={true}
-                            value={modifiedTaskDetails.Status}
-                            onChange={(event) => handleChange(event, "Status")}
-                        />
+                        <FormControl
+                            sx={{ width: "150px" }}
+                        >
+                            <InputLabel id="status-label">Status</InputLabel>
+                            <Select
+                                labelId='status-label'
+                                variant='outlined'
+                                label="Priority"
+                                onChange={(event) => handleChange(event, "Status")}
+                                value={modifiedTaskDetails.Status}
+                            >
+                                <MenuItem value={1}>Pending</MenuItem>
+                                <MenuItem value={2}>Completed</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
                     <Grid size={12}>
                         <FormControl
@@ -115,7 +120,7 @@ const TaskDetails = (props) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.close}>Cancel</Button>
-                <Button type="submit">{props.taskDetails?.ID ? "Update" : "Add"}</Button>
+                <Button onClick={() => props.save(modifiedTaskDetails)} type="submit">{props.taskDetails?.ID ? "Update" : "Add"}</Button>
             </DialogActions>
         </Dialog>
     )
