@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Route, Router } from 'react-router'
+import { Route, Routes } from 'react-router'
 import Dashboard from './components/dashboard/Dashboard'
 
 function App() {
@@ -10,10 +8,10 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Routes>
         <Route path='/' element={<div>login</div>} />
         <Route path='/dashboard' Component={Dashboard} />
-      </Router>
+      </Routes>
     </>
   )
 }
